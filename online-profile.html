@@ -79,7 +79,12 @@
             background-color: blue;
             color: white;
         }
-        
+        #time{
+            color: violet;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -100,7 +105,12 @@
             <div id="sns">
                 <h2>SNS</h2>
                     <h3><a href="#">클릭!</a></h3>
-            </div>           
+                    <br>
+                    <div id="time"></div>
+            </div>
+            <div>
+                
+            </div>          
         </aside>
         <div id="main">
             <section>
@@ -172,3 +182,15 @@
     </div>
 </body>
 </html>
+<script>
+    setInterval(()=>{
+        let datetime = new Date();
+        let obj = document.querySelector("#time");
+        let second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        let time = datetime.getHours() + " : "
+                    + datetime.getMinutes() + " : "
+                    + second;
+
+        obj.innerHTML = time;
+    }, 1000)
+</script>
