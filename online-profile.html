@@ -19,6 +19,9 @@
             text-align: center;
             border-top-left-radius: 2%;
             border-bottom-left-radius: 2%;
+            display: flex;
+            flex-direction: column;
+
         }
         #main{
             float: left;
@@ -29,12 +32,15 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background-image: url(../media/이미지1.jfif);
+            background-image: url(media/캡처1.JPG);
             background-size: contain; 
             display: block;
             position: relative;
             top: 15px;
             left: 50px;
+        }
+        #box1:hover{
+            background-image: url(media/캡처2.JPG);
         }
         #namecard{
             display: block;
@@ -43,9 +49,10 @@
             display: block;
         }
         #sns{
-            display: block;
             text-align: center;
             position: relative;
+             display: flex;
+            flex-direction: column;
         }
         
         a{
@@ -70,10 +77,14 @@
         #main h2{
             border-left: 5px solid blue;
         }
+        tr td{
+            border: 2px solid gray;
+        }
         .table{
             border: 2px solid gray;
             width: 348px;
             text-align: center;
+            border-collapse: collapse;
         }
         .table thead{
             background-color: blue;
@@ -81,9 +92,10 @@
         }
         #time{
             color: violet;
-            font-size: 50px;
+            font-size: 20px;
             font-weight: bold;
             text-align: center;
+            
         }
     </style>
 </head>
@@ -95,8 +107,8 @@
             <div id="namecard">
                 <div id="box1">
                 </div>
-                <h1>Hong Gildong</h1>    
-                <p>프로그래밍 재밌다</p>
+                <h1>Choi JeHyeon</h1>    
+                <p>프로그래밍 열심히 하겠습니다!</p>
             </div>
             <div id="detail">
                 <p>⛪Incheon, Korea</p>
@@ -187,8 +199,13 @@
         let datetime = new Date();
         let obj = document.querySelector("#time");
         let second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-        let time = datetime.getHours() + " : "
-                    + datetime.getMinutes() + " : "
+        let minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        let ampm = datetime.getHours() < 12 ? "오전 " : "오후 ";
+        let hours = datetime.getHours() % 12;
+        hours = (hours == 0) ? 12 : hours;
+        let time = (datetime.getFullYear() + "년 " + (datetime.getMonth() + 1) + "월 " + datetime.getDate()) 
+                   + "일 " + "<br>" + datetime.getHours() + " : "
+                    + minute + " : "
                     + second;
 
         obj.innerHTML = time;
