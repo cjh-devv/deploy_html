@@ -1,0 +1,66 @@
+body{
+            background-color: rgb(2, 235, 235);
+        }
+        #container{
+            width: 1300px;
+            height: 750px;
+            margin: 0% auto;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-areas: 
+            "Lbar main Rbar"
+            ;
+            grid-template-columns: 300px 1fr 300px;
+        }
+        #Lbar{
+            grid-area: Lbar;
+        }
+        #main{
+            grid-area: main;
+            display: flex;
+            flex-direction: column; /* 세로로 쌓기 */
+            align-items: center;    /* 가로 중앙 */
+            justify-content: space-around; /* 세로 중앙 */
+        }
+        #bonoBox{
+            width: 350px;
+            height: 350px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column; /* 세로로 쌓기 */
+            align-items: center;    /* 가로 중앙 */
+            justify-content:center;
+        }
+        #bonoBox img{
+            width: 260px;
+            height: 260px;
+            z-index: 2;
+        }
+        #txt{
+            font-size: 40px;
+            color: white;
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+            width: 800px;
+            height: 120px;
+            white-space: pre-line;
+            text-align: center;
+        }
+        #enter{
+            font-size: 40px;
+            text-decoration: none;
+            color: white;
+        }
+        #eBox{
+            height: 50px;
+            background-color: rgb(255, 94, 0);
+            border-radius: 10px;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        #eBox:hover{
+            background-color: blueviolet;
+        }
+        #Rbar{
+            grid-area: Rbar;
+
+        }
