@@ -1,0 +1,72 @@
+body{
+        margin: 0;
+        background-color: beige;
+        box-sizing: border-box;
+    }
+
+    #container{
+        width: 500px;
+        height: 500px;
+        margin: 50px auto;
+        display: grid;
+        border: 0px solid black;
+        grid-template-areas:
+        "ca ins"
+        "x git"
+        ;
+
+    }
+    .cacao{
+        width: 250px;
+        height: 250px;
+        grid-area: ca;
+        background-image: url(../media/kakao.png);
+        background-size: contain;
+        cursor: pointer;
+        
+    }
+    .cacao:hover{
+        animation: pulse 0.5s ease-in-out infinite;
+    }
+    .insta{
+        width: 250px;
+        height: 250px;
+        grid-area: ins;
+        border-radius: 10px;
+        background-image: url(../media/인스타.jpg);
+        background-size: contain;
+        cursor: pointer;
+    }
+    .insta:hover{
+        animation: pulse 0.5s ease-in-out infinite;
+    }
+    .X{
+        width: 250px;
+        height: 250px;
+        grid-area: x;
+        background-image:url(../media/twit.svg);
+        background-size: contain;
+        cursor: pointer;
+    }
+    .X:hover{
+        animation: pulse 0.5s ease-in-out infinite;
+    }
+    .git{
+        width: 250px;
+        height: 250px;
+        grid-area: git;
+        background-image:url(../media/깃허브.jpg);
+        background-size: contain;
+        cursor: pointer;
+    }
+    .git:hover{
+        animation: pulse 0.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+            0%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(1.2); 
+            }
+        }

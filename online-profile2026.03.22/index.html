@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index-style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <div id="Lbar"></div>
+        <div id="main">
+            <div id="bonoBox">
+                <img src="../media/보노보노.png" alt="">
+            </div>
+            <div id="txtBox">   
+                <div id="txt"></div>
+            </div> 
+            <div id="eBox">
+                <a id="enter" href="online-profile.html">환영합니다!</a>
+            </div>
+        </div>
+        <div id="Rbar"></div>
+    </div>
+</body>
+</html>
+<script>
+let text = "안녕하세요. 반갑습니다!\n 개발자 최제현의 포트폴리오 입니다.                      "
+    let currentText = "";
+    let i = 0;
+    let obj = document.querySelector("#txt");
+    let id = setInterval(()=>{
+        currentText = currentText + text.charAt(i);   //기존의 텍스트에 새로운 텍스트 추가. 
+        obj.innerHTML = currentText;                //추가되는것처럼 보이지만 처음부터 다시 찍는거
+        i++;
+        if(i >= text.length){
+            currentText = "";          //  초기화하면 0.3초뒤 다시 실행되면 처음부터 다시
+            i=0;
+        }
+    },100);
+</script>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="weather-style.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <div>
+            <div class="head">현재 부평(37.5, 126.7)의 날씨는...</div>
+        </div>
+        <div id="main">     
+            <div>
+                <div>온도 : {{temp}}{{tempUnit}}</div>
+            </div>
+            <div>
+                <div>풍속 : {{winds}}{{windUnit}} </div>
+            </div>
+            <div>
+                <div>풍향 : {{windd}}</div>
+            </div>
+            <div id="weatherb" v-if="weatherImg">
+                <img :src="weatherImg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                temp:"",
+                tempUnit:"",
+                winds:"",
+                wind:0,
+                windUnit:"",
+                windd:"",
+                weather:"",
+                weatherImg:"",
+            };
+        },
+        methods: {
+            fnWeather: function () {
+                let self = this;
+                $.ajax({
+                    url: "https://api.open-meteo.com/v1/forecast",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                        latitude: 37.5,    
+                        longitude: 126.7,
+                        current_weather: true},
+                    success: function (data) {
+                        console.log(data)
+                        // alert("현재 부평(37.5, 126.7)\n" + "온도는 " 
+                        // + data.current_weather.temperature + "℃\n" + 
+                        // "풍속은 " + data.current_weather.windspeed + "㎧ 입니다.")
+                        self.temp = data.current_weather.temperature;
+                        self.tempUnit = data.current_weather_units.temperature;
+                        self.winds = data.current_weather.windspeed;
+                        self.windUnit = data.current_weather_units.windspeed;
+                        self.wind = data.current_weather.winddirection;
+                        self.weather = data.current_weather.weathercode;
+                        // code === 0) "☀️ 맑음";
+                        // code >= 1 && code <= 3) "🌤️ 구름 조금";
+                        // code >= 45 && code <= 48) "🌫️ 안개";
+                        // code >= 51 && code <= 67)  "🌧️ 비";
+                        // code >= 71 && code <= 77)  "❄️ 눈";
+                        // code >= 80 && code <= 99)  "⛈️ 소나기/번개";
+                        if (self.wind >= 337.5 || self.wind < 22.5) { self.windd = "북풍"; }
+                        else if (self.wind >= 22.5 && self.wind < 67.5) { self.windd = "북동풍"; }
+                        else if (self.wind >= 67.5 && self.wind < 112.5) { self.windd = "동풍"; }
+                        else if (self.wind >= 112.5 && self.wind < 157.5) { self.windd = "남동풍"; }
+                        else if (self.wind >= 157.5 && self.wind < 202.5) { self.windd = "남풍"; }
+                        else if (self.wind >= 202.5 && self.wind < 247.5) { self.windd = "남서풍"; }
+                        else if (self.wind >= 247.5 && self.wind < 292.5) { self.windd = "서풍"; }
+                        else if (self.wind >= 292.5 && self.wind < 337.5) { self.windd = "북서풍"}           
+                        self.fnWcheck(self.weather); 
+                    }
+                });
+            },
+            fnWcheck: function(code){
+                let self = this;
+                // let wbox = document.querySelector("#weatherbox")
+                // let obj = document.createElement("img");
+                // let src = document.querySelector("obj");
+                // let src2 = document.createAttribute("src");
+                if(code == 0){
+                    self.weatherImg = "../media/clear-day.svg";
+                }else if(code >= 1 && code <= 3){
+                    self.weatherImg = "../media/overcast-day.svg";    
+                }else if(code >= 45 && code <= 48){
+                    self.weatherImg = "../media/mist.svg";
+                }else if(code >= 51 && code <= 67){
+                    self.weatherImg = "../media/rain.svg";
+                }else if(code >= 71 && code <= 77){
+                    self.weatherImg = "../media/snow.svg";
+                }else if(code >= 80 && code <= 99){
+                    self.weatherImg = "../media/hail.svg";
+                }
+                // obj.setAttributeNode(src2);
+                // wbox.appendChild(obj);                        
+            }
+        }, // methods
+        mounted() {
+            let self = this;
+            self.fnWeather();
+        }
+    });
+
+    app.mount('#app');
+</script>

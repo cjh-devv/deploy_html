@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+    <table>
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>코인명</th>
+                <th>거래시간</th>
+                <th>현재가</th>
+                <th>시가</th>
+                <th>고가</th>
+                <th>저가</th>
+                <th>전일대비(원)</th>
+                <th>전일대비(%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="name">{{name}}</td>
+                <td class="tradeTime">{{tradeTime}}</td>
+                <td class="curPrice">{{curPrice}}</td>
+                <td class="opPrice">{{opPrice}}</td>
+                <td class="highP">{{highP}}</td>
+                <td class="lowP">{{lowP}}</td>
+                <td class="chWon">{{chWon}}</td>
+                <td class="chPer">{{(chPer*100).toFixed(2)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                coinList:[],
+                name:"",
+                tradeTime:"",
+                curPrice:"",
+                opPrice:"",
+                highP:"",
+                lowP:"",
+                chWon:"",
+                chPer:"",
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnBit: function () {
+                let self = this;
+                $.ajax({
+                    url: "https://api.upbit.com/v1/ticker?markets=KRW-BTC",
+                    dataType: "json",
+                    type: "GET",
+                    success: function (data) {
+                        console.log(data);
+                       if (data) {
+                            self.coinList = data;
+                            self.name = self.coinList[0].market;
+                            self.tradeTime = self.coinList[0].trade_time_kst;
+                            self.curPrice = self.coinList[0].trade_price;
+                            self.opPrice = self.coinList[0].opening_price;
+                            self.highP = self.coinList[0].high_price;
+                            self.lowP = self.coinList[0].low_price;
+                            self.chWon = self.coinList[0].signed_change_price;
+                            self.chPer = self.coinList[0].signed_change_rate;
+
+                        }
+                    }
+                });
+            },
+            
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            this.fnBit();
+        }
+    });
+
+    app.mount('#app');
+</script>

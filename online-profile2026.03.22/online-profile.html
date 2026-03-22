@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<title>온라인 프로필</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- 사이드바 -->
+         <div class="header">
+            <div class="txtbox">
+                <div class="txt"></div>
+                <div class="boxbanner" onclick="fnHide()">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">{{test1}}</div>
+                            <div class="swiper-slide">{{test2}}</div>
+                            <div class="swiper-slide">{{test3}}</div>
+                            <div class="swiper-slide">{{test4}}</div>
+                            <div class="swiper-slide">{{test5}}</div>
+                            <div class="swiper-slide">{{test6}}</div>
+                        </div>
+                        <!-- <div class="swiper-pagination"></div> -->
+                        <!-- <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside id="sidebar">
+            <div id="namecard">
+                <video id="vid"  src="../media/pikafast.mp4" autoplay muted loop playsinline></video>
+                <img id="img"  src="../media/pika.webp" alt="">
+                <h1>Choi JeHyeon</h1>    
+                <p>프로그래밍 열심히 하겠습니다!</p>
+            </div>
+            <div id="detail">
+                <p>⛪Incheon, Korea</p>
+                <p>📧test@naver.com</p>
+                <p>📞010-1234-4567</p>                                 
+            </div>
+            <div id="sns">
+                <h2>SNS</h2>
+                    <h3><a class="btnsns" href="javascript:;" onclick="fnPopup()">클릭!</a></h3>
+            </div>
+            <div class="timebox">
+               <div id="time"></div> 
+            </div>          
+        </aside>
+        <div id="main">
+            <section class="sec" v-if="flag==1">
+                <h2 class="subtitle">자기소개</h2>
+                <p><mark>프로그래밍</mark>에 관심이 많습니다. <br>현재 열심히 공부하며 코딩 중!</p>
+            </section>
+
+            <!-- 경력 -->
+            <section class="sec" v-if="flag==2">
+                <h2 class="subtitle">Experience</h2>
+                <ul>
+                    <li>프론트엔드
+                        <ul>
+                            <li>HTML/CSS/JAVASCRIPT </li>
+                            <li>웹 페이지 잘 만든다 </li>
+                            <li>다 잘함</li> 
+                        </ul>
+                    </li>
+                    <li>백엔드
+                        <ul>
+                            <li>자바 잘함 </li>
+                            <li>오라클 더 잘함</li>
+                        </ul>                        
+                    </li>
+                </ul>             
+            </section>
+
+            <!-- 숙련도 -->
+            <section class="sec" v-if="flag==3">
+                <h2 class="subtitle">보유 기술</h2>
+                <li style="list-style: none;"> 
+                    <ul>
+                        <li>자바 </li>
+                        <li>오라클</li>
+                        <li>html</li>
+                        <li>flutter</li>
+                    </ul>                        
+                </li>
+                <h2 class="subtitle">프로젝트</h2>
+                <li style="list-style: none;"> 
+                    <ul>
+                        <li>쇼핑몰 </li>
+                        <li>온라인프로필</li>
+                    </ul>                        
+                </li>
+            </section>
+
+            <!-- 학력 -->
+            <section class="sec" v-if="flag==4">
+                <h2 class="subtitle">Education</h2>
+                <table class="table">
+                  <caption>학력 사항</caption>
+                  <thead>
+                      <tr>
+                          <th>출신학교</th>
+                          <th>전공</th>
+                          <th>학위</th> 
+                          <th>기간</th>
+                          <th>구분</th>
+                          <th>성적</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>좋은대학교</td>
+                          <td>좋은학과</td>
+                          <td>학사</td>
+                          <td>2010.3 ~ 2013.2</td>
+                          <td>졸업</td>
+                          <td>(가)</td>
+                      </tr>
+                      <tr>
+                          <td>꽤좋은고등학교</td>
+                          <td> - </td>
+                          <td> - </td>
+                          <td>2007.3 ~ 2009.2</td>
+                          <td>졸업</td>
+                          <td>(양)</td>
+                      </tr>
+                      <tr>
+                          <td>희귀한중학교</td>
+                          <td> - </td>
+                          <td> - </td>
+                          <td>2005.3 ~ 2007.2</td>
+                          <td>졸업</td>
+                          <td>(미)</td>
+                      </tr>
+                      <tr>
+                          <td>전설의초등학교</td>
+                          <td> - </td>
+                          <td> - </td>
+                          <td>2003.3 ~ 2005.2</td>
+                          <td>졸업</td>
+                          <td>(우)</td>
+                      </tr>
+                  </tbody>
+                </table>
+            </section>
+            <!-- 취미 -->
+            <section class="sec" v-if="flag==5">
+                <h2 class="subtitle">취미 & 관심사</h2>
+                <li style="list-style: none;"> 
+                    <ul>
+                        <li>게임 </li>
+                        <li>독서</li>
+                        <li>비트코인</li>
+                        <li>주식</li>
+                    </ul>                        
+                </li>
+            </section>
+        </div>
+        <div class="mainBtn">
+            <button @click="fnSetFlag(1), fnRotate()">자기소개</button>
+            <button @click="fnSetFlag(2), fnRotate()">Experience</button>
+            <button @click="fnSetFlag(3), fnRotate()">보유 기술&프로젝트</button>
+            <button @click="fnSetFlag(4), fnRotate()">Education</button>
+            <button @click="fnSetFlag(5), fnRotate()">취미&관심사</button>
+        </div> 
+        <div class="Rsidebar">
+            <div id="weatherbox">
+                <img src="../media/forecast.png" onclick="fnPopup2()"></img>
+            </div>
+            <div id="coinbox">
+                <img src="../media/bitcoin.png" onclick="fnPopup3()"></img>
+            </div>
+            <div id="backbox">
+                <img id="back"  src="../media/back.png" onclick="fnback()"></img>
+            </div>
+        </div>      
+    </div>
+</body>
+</html>
+<script>
+    setInterval(()=>{
+        let datetime = new Date();
+        let obj = document.querySelector("#time");
+        let second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        let minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        let ampm = datetime.getHours() < 12 ? "오전 " : "오후 ";
+        let hours = datetime.getHours() % 12;
+        hours = (hours == 0) ? 12 : hours;
+        let time = (datetime.getFullYear() + "년 " + (datetime.getMonth() + 1) + "월 " + datetime.getDate()) 
+                   + "일 " + "<br>" + ampm + hours + " : "
+                    + minute + " : "
+                    + second;
+
+        obj.innerHTML = time;
+    }, 1000);
+
+    let text = `
+    오늘도버그많으셨습니다영구적야근무료급식소버그파티코딩배우고일하는사람안타깝네요코딩왜함
+    치킨집사장님족발집사장님이걸왜알았을까사직서내고오는길어차피안될거왜하고있니버그무한루프
+    탈출불가모니터부수고싶다내가사람인가기계인가버그는왜안죽어살려줘제발자바가나를먹는다오라
+    클이내영혼을가져간다이제나는코딩노예코딩안배운뇌삽니다탈출은지능순이라는데나는이미틀렸어
+    망했다지옥에서온코딩파티살려줘요내인생망했다버그하나에영혼팔고퇴사할래`
+    
+   
+        
+    function fnPopup(){
+        // window.open(인자1, 인자2, 인자3)
+        // 인자1 : 팝업을 띄울 주소
+        // 인자2 : 팝업의 이름
+        // 인자3 : 크기(width, height) 및 위치(left, top ...)
+        let top = (screen.availHeight-600) / 2;
+        let left = (screen.availWidth-600) / 2;
+
+        window.open(
+            "Sns.html", 
+            "sns", 
+            `width=600, height=600, left=${left}, top=${top}`
+        );
+    }; 
+    function fnPopup2(){
+        let top = (screen.availHeight-600) / 2;
+        let left = (screen.availWidth-600) / 2;
+
+        window.open(
+            "weather.html", 
+            "weather", 
+            `width=600, height=600, left=${left}, top=${top}`
+        );
+    };
+    function fnPopup3(){
+        let top = (screen.availHeight-600) / 2;
+        let left = (screen.availWidth-600) / 2;
+
+        window.open(
+            "economy.html", 
+            "economy", 
+            `width=600, height=600, left=${left}, top=${top}`
+        );
+    };
+    function fnHide(){
+                if(confirm("배너를 닫을까요?")){
+                let ban = document.querySelector(".boxbanner");
+                let insane = document.querySelector(".txt")
+                ban.style="opacity:0; z-index:0;"
+                };
+            };
+    function fnback(){
+                if(confirm("대문으로 돌아가시겠습니까?")){
+                    location.href = "index.html";
+                }
+            };
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                flag:1,
+                test1:"오늘도수업수고하셨습니다경제적자유선상마약코딩파티코딩안배우고일하는사",
+                test2:"람들한심해보이지않네요코딩왜안함치킨집사장님족발집사장님이걸왜이제알았",//35글자
+                test3:"을까이력서내고오는길♚♚코딩☆♚♚공부시$$전원취업성공☜☜자바스프링##",
+                test4:"연봉상승##100%증정♜자리야♜트레이서￥JAVA공부중★특별보너스획득기회@",
+                test5:"풀스택공부를시작하고나의성공시대시작했다풀스택공부를시작하고나를찾는회",
+                test6:"사많아졌다풀스택공부를시작하고내인생이달라졌다♜☜☜♜♥★♥♚★♚#$",
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnRotate:function(){
+                let obj = document.querySelector("#main");
+                obj.style.animation = "rotate 1s ease";
+                setTimeout(() => {
+                     obj.style.animation = "";
+                 }, 1000);
+            },
+            fnSetFlag:function(num){
+                let self = this;
+                setTimeout(() => {
+                self.flag = num;
+                }, 1000);
+            },
+            fnInit: function() {
+                const swiper = new Swiper('.swiper', {
+	            // 기본 옵션 설정
+                    loop: true, // 반복
+                    autoplay: {
+                        delay: 500,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            },
+             
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            let self = this;
+            self.fnInit();
+        }
+    });
+
+    app.mount('#app');
+     let insan = document.querySelector(".txt");
+    
+    setInterval(() => {
+        text = text.substring(1) + text.charAt(0);
+        let r = Math.floor(Math.random()*256);
+        let g = Math.floor(Math.random()*256);
+        let b = Math.floor(Math.random()*256);
+        insan.innerHTML = "<div style='color:rgb(" + r + "," + g + "," + b + ")'>" + text + "</div>";
+        }, 50);
+</script>
